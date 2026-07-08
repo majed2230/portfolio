@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Majed Almutairi — AI &amp; IT Solutions Specialist</title>
+<meta name="description" content="The personnel dossier of Majed Almutairi — AI & IT Solutions Specialist. Data analysis, artificial intelligence, software testing, and information technology." />
+
+<!-- Web fonts (enhance when online; strong fallbacks below keep it premium offline) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+<style>
+/* =========================================================================
+ * "THE DOSSIER" — a Peaky Blinders-inspired, fully self-contained portfolio.
+ * Deep charcoal · muted metallic gold · sharp formal typography.
+ * Everything (styles + content + behavior) lives in this one file.
+ * ========================================================================= */
+
+:root{
+  --ink:#141414;          /* deep charcoal canvas */
+  --ink-0:#0E0E0F;        /* deepest (hero, footer) */
+  --ink-2:#1c1c1e;        /* raised surface */
+  --ink-3:#212124;        /* cards */
+  --gold:#C6A455;         /* muted metallic gold */
+  --gold-hi:#E7CE8E;      /* gold highlight / sheen */
+  --gold-lo:#7C6329;      /* gold shadow */
+  --bronze:#B08D57;
+  --parchment:#E9E4D8;    /* warm near-white text */
+  --smoke:#9A968C;        /* muted text */
+  --line:#2E2E31;         /* hairline */
+  --gold-grad:linear-gradient(180deg,#E7CE8E 0%,#C6A455 45%,#9A7B32 100%);
+  --font-display:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;
+  --font-marque:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --font-body:'EB Garamond',Georgia,'Times New Roman',serif;
+  --maxw:1140px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:var(--parchment);
+  font-family:var(--font-body);
+  font-size:18px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;position:relative;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+::selection{background:rgba(198,164,85,.28);color:#fff;}
+section[id]{scroll-margin-top:84px;}
+
+/* Filmic texture + vignette on the charcoal */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(120% 75% at 50% -10%,rgba(198,164,85,.06),transparent 55%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.010) 0 1px,transparent 1px 3px),
+    var(--ink);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  box-shadow:inset 0 0 260px 60px rgba(0,0,0,.85);
+}
+/* Subtle film grain */
+.grain{
+  position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.gold{color:var(--gold);}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 2rem;}
+.wrap-narrow{max-width:800px;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ---------------------------------------------------- NAVBAR */
+#navbar{position:fixed;top:0;inset-inline:0;z-index:50;border-bottom:1px solid transparent;transition:background .35s,border-color .35s,backdrop-filter .35s;}
+#navbar.scrolled{background:rgba(14,14,15,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;}
+.brand{display:flex;align-items:center;gap:.7rem;}
+.brand-word{font-family:var(--font-marque);font-weight:600;font-size:1.35rem;letter-spacing:.02em;white-space:nowrap;}
+.seal-ring-outer{fill:none;stroke:var(--gold);stroke-width:2;}
+.seal-ring-inner{fill:none;stroke:var(--gold-lo);stroke-width:1;}
+.seal-mono{font-family:var(--font-marque);font-weight:700;font-size:34px;fill:var(--gold);letter-spacing:1px;}
+.nav-links{display:flex;align-items:center;gap:1.55rem;list-style:none;}
+.nav-link{font-family:var(--font-display);font-weight:400;font-size:.74rem;text-transform:uppercase;letter-spacing:.18em;color:var(--smoke);position:relative;padding:4px 0;transition:color .2s;}
+.nav-link:hover{color:var(--parchment);}
+.nav-link::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--gold);transition:width .28s;}
+.nav-link:hover::after{width:100%;}
+.btn-resume{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-display);font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);border:1px solid var(--gold-lo);padding:.55rem 1.05rem;transition:.25s;}
+.btn-resume:hover{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;}
+.menu-toggle span{width:24px;height:2px;background:var(--gold);transition:.3s;}
+.mobile-menu{display:none;flex-direction:column;background:rgba(14,14,15,.98);border-top:1px solid var(--line);padding:1rem 2rem 1.5rem;}
+.mobile-menu.open{display:flex;}
+.mobile-link{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.16em;font-size:.85rem;color:var(--smoke);padding:.7rem 0;border-bottom:1px solid var(--line);}
+.mobile-link:hover{color:var(--gold);}
+
+/* ---------------------------------------------------- HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;background:radial-gradient(80% 60% at 50% 40%,rgba(28,28,30,.6),transparent 70%),var(--ink-0);}
+.hero-inner{max-width:780px;}
+.dossier-bar{display:inline-flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:center;border:1px solid var(--line);padding:.5rem 1.1rem;margin-bottom:2.4rem;background:rgba(28,28,30,.6);}
+.stamp{font-family:var(--font-display);font-weight:600;font-size:.66rem;text-transform:uppercase;letter-spacing:.22em;color:#d9b866;border:1px solid var(--gold-lo);padding:.2rem .55rem;}
+.dossier-bar-label,.dossier-bar-file{font-family:var(--font-display);font-size:.66rem;text-transform:uppercase;letter-spacing:.2em;color:var(--smoke);}
+.dossier-bar-file{color:var(--parchment);}
+.crest{margin-bottom:1.5rem;}
+.crest-ring-outer{fill:none;stroke:var(--gold);stroke-width:2;}
+.crest-ring-inner{fill:none;stroke:var(--gold-lo);stroke-width:1;stroke-dasharray:2 4;}
+.crest-mono{font-family:var(--font-marque);font-weight:700;font-size:74px;fill:var(--gold);letter-spacing:2px;}
+.crest-sub{font-family:var(--font-display);font-size:10px;letter-spacing:4px;fill:var(--smoke);text-transform:uppercase;}
+.hero-eyebrow{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.32em;font-size:.72rem;color:var(--gold);margin-bottom:1rem;}
+.hero-name{font-family:var(--font-marque);font-weight:600;font-size:clamp(2.8rem,7vw,4.8rem);line-height:1.02;letter-spacing:.01em;color:var(--parchment);}
+.hero-rule{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.5rem auto;max-width:320px;color:var(--gold);}
+.hero-rule span{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-lo),transparent);}
+.hero-rule i{font-style:normal;font-size:.8rem;}
+.hero-title{font-family:var(--font-display);font-weight:300;text-transform:uppercase;letter-spacing:.28em;font-size:clamp(.95rem,2.4vw,1.4rem);color:var(--parchment);}
+.hero-tagline{font-family:var(--font-body);font-style:italic;font-size:1.2rem;color:var(--smoke);max-width:560px;margin:1.6rem auto 0;}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.6rem;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--font-display);font-weight:500;font-size:.8rem;text-transform:uppercase;letter-spacing:.18em;padding:.9rem 1.9rem;cursor:pointer;transition:transform .2s,background .25s,color .25s,box-shadow .25s,border-color .25s;border:1px solid transparent;}
+.btn-gold{color:var(--ink-0);background:var(--gold-grad);box-shadow:0 6px 26px -10px rgba(198,164,85,.6);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 34px -10px rgba(231,206,142,.7);}
+.btn-outline{color:var(--gold);border-color:var(--gold-lo);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold-hi);transform:translateY(-2px);}
+.btn-block{width:100%;}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--smoke);font-family:var(--font-display);font-size:.62rem;text-transform:uppercase;letter-spacing:.24em;transition:color .2s;}
+.scroll-cue:hover{color:var(--gold);}
+.scroll-cue svg{animation:nudge 1.8s ease-in-out infinite;}
+@keyframes nudge{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+
+/* ---------------------------------------------------- SECTION SHELL */
+.section{padding:6rem 0;position:relative;}
+.sec-head{display:flex;align-items:flex-start;gap:1.4rem;margin-bottom:3rem;}
+.sec-head-center{justify-content:center;text-align:center;}
+.sec-index{font-family:var(--font-marque);font-weight:600;font-size:2.6rem;line-height:1;color:transparent;-webkit-text-stroke:1px var(--gold-lo);min-width:2.4rem;}
+.sec-eyebrow{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.26em;font-size:.7rem;color:var(--gold);margin-bottom:.4rem;}
+.sec-title{font-family:var(--font-marque);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.05;color:var(--parchment);}
+.sec-lede{font-style:italic;color:var(--smoke);margin-top:.8rem;max-width:520px;}
+.sec-head-center .sec-lede{margin-inline:auto;}
+.divider{display:flex;align-items:center;justify-content:center;gap:1.2rem;max-width:460px;margin:0 auto;color:var(--gold);}
+.divider span{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-lo),transparent);}
+.divider i{font-style:normal;font-size:.7rem;}
+
+/* ---------------------------------------------------- BRIEF */
+.brief-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:2.5rem;}
+.brief-body p{margin-bottom:1.2rem;color:#cfc9bb;}
+.brief-body p:first-child::first-letter{font-family:var(--font-marque);font-size:3.4rem;line-height:.8;float:left;padding:.1rem .7rem 0 0;color:var(--gold);}
+.vital-card{border:1px solid var(--line);background:linear-gradient(180deg,var(--ink-3),var(--ink-2));padding:1.6rem;position:relative;}
+.vital-card::before,.vital-card::after{content:"";position:absolute;width:14px;height:14px;border:1px solid var(--gold);}
+.vital-card::before{top:6px;left:6px;border-right:0;border-bottom:0;}
+.vital-card::after{bottom:6px;right:6px;border-left:0;border-top:0;}
+.vital-head{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:var(--gold);padding-bottom:.9rem;margin-bottom:1rem;border-bottom:1px solid var(--line);}
+.vital-list{display:flex;flex-direction:column;gap:.9rem;}
+.vital-list dt{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-size:.6rem;color:var(--smoke);}
+.vital-list dd{color:var(--parchment);font-size:1rem;margin-top:.1rem;}
+
+/* ---------------------------------------------------- SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;}
+.skill-card{border:1px solid var(--line);background:var(--ink-2);padding:1.5rem;position:relative;transition:border-color .3s,transform .3s,box-shadow .3s;}
+.skill-card:hover{border-color:var(--gold-lo);transform:translateY(-3px);box-shadow:0 16px 40px -24px rgba(198,164,85,.5);}
+.skill-head{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;}
+.skill-head .ico{color:var(--gold);display:inline-flex;}
+.skill-head h3{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.14em;font-weight:500;font-size:.95rem;color:var(--parchment);}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;}
+.chip{font-family:var(--font-display);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--smoke);border:1px solid var(--line);padding:.32rem .7rem;transition:.2s;}
+.skill-card:hover .chip{border-color:rgba(198,164,85,.3);}
+.chip:hover{color:var(--gold);border-color:var(--gold-lo);}
+
+/* ---------------------------------------------------- ACCORDION */
+.accordion{display:flex;flex-direction:column;gap:.9rem;}
+.acc-item{border:1px solid var(--line);background:var(--ink-2);transition:border-color .3s;}
+.acc-item.open{border-color:var(--gold-lo);}
+.acc-trigger{width:100%;text-align:left;background:none;border:0;cursor:pointer;padding:1.3rem 1.5rem;display:flex;align-items:center;gap:1.2rem;color:inherit;font:inherit;}
+.acc-num{font-family:var(--font-marque);font-size:1.4rem;color:var(--gold-lo);min-width:1.8rem;}
+.acc-main{flex:1;}
+.acc-role{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.1em;font-weight:500;font-size:1.02rem;color:var(--parchment);}
+.acc-org{font-family:var(--font-body);font-style:italic;color:var(--gold);font-size:1rem;text-transform:none;letter-spacing:0;}
+.acc-period{font-family:var(--font-display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);white-space:nowrap;}
+.acc-chevron{color:var(--gold);transition:transform .35s;flex-shrink:0;}
+.acc-item.open .acc-chevron{transform:rotate(180deg);}
+.acc-panel{overflow:hidden;transition:max-height .4s ease;}
+.acc-body{padding:0 1.5rem 1.5rem 4.7rem;}
+.acc-meta{font-family:var(--font-display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);margin-bottom:.9rem;}
+.acc-body ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.acc-body li{position:relative;padding-left:1.3rem;color:#cfc9bb;}
+.acc-body li::before{content:"\2014";position:absolute;left:0;color:var(--gold-lo);}
+
+/* ---------------------------------------------------- PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+.proj-card{border:1px solid var(--line);background:var(--ink-2);padding:1.6rem;display:flex;flex-direction:column;position:relative;transition:border-color .3s,transform .3s,box-shadow .3s;}
+.proj-card:hover{border-color:var(--gold-lo);transform:translateY(-3px);box-shadow:0 16px 40px -24px rgba(198,164,85,.5);}
+.proj-card.featured{border-color:rgba(198,164,85,.45);}
+.proj-flag{font-family:var(--font-display);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;}
+.proj-card h3{font-family:var(--font-marque);font-weight:600;font-size:1.4rem;color:var(--parchment);margin-bottom:.6rem;line-height:1.15;}
+.proj-card p{font-size:1rem;color:var(--smoke);flex:1;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;}
+
+/* ---------------------------------------------------- CERTIFICATIONS */
+.cert-toggle-row{margin-bottom:1.6rem;}
+.btn-textlink{background:none;border:0;cursor:pointer;color:var(--gold);font-family:var(--font-display);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;border-bottom:1px solid var(--gold-lo);padding-bottom:2px;transition:color .2s;}
+.btn-textlink:hover{color:var(--gold-hi);}
+.certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+.certs-grid.collapsed .cert-card:nth-child(n+5){display:none;}
+.cert-card{border:1px solid var(--line);background:var(--ink-2);padding:1.3rem;position:relative;transition:border-color .3s,transform .3s;}
+.cert-card:hover{border-color:var(--gold-lo);transform:translateY(-2px);}
+.cert-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;}
+.cert-tag{font-family:var(--font-display);font-size:.6rem;text-transform:uppercase;letter-spacing:.14em;padding:.2rem .55rem;border:1px solid;}
+.cert-date{font-family:var(--font-display);font-size:.64rem;letter-spacing:.1em;color:var(--smoke);}
+.cert-card h3{font-family:var(--font-body);font-weight:500;font-size:1.1rem;color:var(--parchment);line-height:1.25;}
+.cert-issuer{font-style:italic;color:var(--smoke);font-size:.92rem;margin-top:.4rem;}
+
+/* ---------------------------------------------------- CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:2.5rem;}
+.contact-details{display:flex;flex-direction:column;gap:1.3rem;}
+.contact-row{display:flex;align-items:flex-start;gap:1rem;}
+.contact-row .ico{color:var(--gold);margin-top:3px;}
+.contact-row .lbl{font-family:var(--font-display);font-size:.6rem;text-transform:uppercase;letter-spacing:.16em;color:var(--smoke);}
+.contact-row .val{color:var(--parchment);font-size:1.05rem;transition:color .2s;}
+.contact-row a.val:hover{color:var(--gold);}
+.contact-form{display:flex;flex-direction:column;gap:.9rem;}
+.field{width:100%;background:var(--ink-2);border:1px solid var(--line);padding:.85rem 1rem;color:var(--parchment);font-family:var(--font-body);font-size:1rem;transition:border-color .2s,box-shadow .2s;resize:none;}
+.field::placeholder{color:var(--smoke);font-style:italic;}
+.field:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(198,164,85,.12);}
+.cf-status{font-family:var(--font-display);font-size:.72rem;letter-spacing:.06em;text-align:center;min-height:1rem;}
+
+/* ---------------------------------------------------- FOOTER */
+.footer{border-top:1px solid var(--line);padding:2.4rem 0;background:var(--ink-0);}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.footer-copy{font-family:var(--font-display);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--smoke);}
+.footer-socials{display:flex;gap:1.2rem;list-style:none;}
+.footer-socials a{color:var(--smoke);transition:color .2s;}
+.footer-socials a:hover{color:var(--gold);}
+
+/* ---------------------------------------------------- REVEAL (safe: visible without JS) */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease;}
+.js .reveal.is-visible{opacity:1;transform:none;}
+
+/* ---------------------------------------------------- RESPONSIVE */
+@media(max-width:900px){
+  .nav-links,.btn-resume{display:none;}
+  .menu-toggle{display:flex;}
+  .brief-grid,.contact-grid{grid-template-columns:1fr;}
+  .skills-grid,.projects-grid,.certs-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:620px){
+  body{font-size:17px;}
+  .wrap{padding:0 1.3rem;}
+  .section{padding:4.5rem 0;}
+  .sec-head{gap:1rem;margin-bottom:2.2rem;}
+  .sec-index{font-size:2rem;min-width:1.8rem;}
+  .skills-grid,.projects-grid,.certs-grid{grid-template-columns:1fr;}
+  .acc-trigger{padding:1.1rem;gap:.8rem;flex-wrap:wrap;}
+  .acc-period{flex-basis:100%;order:3;}
+  .acc-body{padding-left:1.1rem;}
+  .brief-body p:first-child::first-letter{font-size:2.8rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+  .js .reveal{opacity:1;transform:none;}
+}
+</style>
+</head>
+
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============================ NAV ============================ -->
+<header id="navbar">
+  <nav class="nav-inner">
+    <a href="#top" class="brand" aria-label="Majed Almutairi — home">
+      <span aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="38" height="38">
+          <circle cx="50" cy="50" r="46" class="seal-ring-outer"/>
+          <circle cx="50" cy="50" r="39" class="seal-ring-inner"/>
+          <text x="50" y="50" class="seal-mono" text-anchor="middle" dominant-baseline="central">MA</text>
+        </svg>
+      </span>
+      <span class="brand-word">Majed <span class="gold">Almutairi</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#brief" class="nav-link">Brief</a></li>
+      <li><a href="#skills" class="nav-link">Competencies</a></li>
+      <li><a href="#experience" class="nav-link">Service</a></li>
+      <li><a href="#education" class="nav-link">Education</a></li>
+      <li><a href="#projects" class="nav-link">Works</a></li>
+      <li><a href="#certifications" class="nav-link">Credentials</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn-resume"><span>Contact</span></a>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#brief" class="mobile-link">Brief</a>
+    <a href="#skills" class="mobile-link">Competencies</a>
+    <a href="#experience" class="mobile-link">Service</a>
+    <a href="#education" class="mobile-link">Education</a>
+    <a href="#projects" class="mobile-link">Works</a>
+    <a href="#certifications" class="mobile-link">Credentials</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============================ HERO ============================ -->
+  <section id="hero" class="hero">
+    <div class="hero-inner">
+      <div class="dossier-bar reveal">
+        <span class="stamp">Confidential</span>
+        <span class="dossier-bar-label">Personnel Dossier</span>
+        <span class="dossier-bar-file">FILE № SCE-1104950</span>
+      </div>
+      <div class="crest reveal" aria-hidden="true">
+        <svg viewBox="0 0 200 200" width="120" height="120">
+          <circle cx="100" cy="100" r="94" class="crest-ring-outer"/>
+          <circle cx="100" cy="100" r="80" class="crest-ring-inner"/>
+          <text x="100" y="102" class="crest-mono" text-anchor="middle" dominant-baseline="central">MA</text>
+          <text x="100" y="150" class="crest-sub" text-anchor="middle">— EST. 2024 —</text>
+        </svg>
+      </div>
+      <p class="hero-eyebrow reveal">Subject of Record</p>
+      <h1 class="hero-name reveal">Majed Almutairi</h1>
+      <div class="hero-rule reveal" aria-hidden="true"><span></span><i>&#10022;</i><span></span></div>
+      <h2 class="hero-title reveal">AI &amp; IT Solutions Specialist</h2>
+      <p class="hero-tagline reveal">Computer Science graduate translating real-world systems experience into data-driven, AI-augmented solutions.</p>
+      <div class="hero-actions reveal">
+        <a href="#projects" class="btn btn-gold">Review the Works</a>
+        <a href="#contact" class="btn btn-outline">Request an Audience</a>
+      </div>
+    </div>
+    <a href="#brief" class="scroll-cue" aria-label="Scroll down">
+      <span>Peruse the File</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- ============================ I · BRIEF ============================ -->
+  <section id="brief" class="section">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="sec-index">I</span>
+        <div><p class="sec-eyebrow">The Brief</p><h2 class="sec-title">A Matter of Record</h2></div>
+      </header>
+      <div class="brief-grid">
+        <div class="brief-body reveal">
+          <p>A Computer Science &amp; Information Technology graduate of the University of Jeddah with a systems-first foundation. Over three years operating production healthcare systems at Khulais General Hospital, I managed patient data, admissions, and reporting workflows where precision and confidentiality were absolute requirements.</p>
+          <p>Upon that operational discipline I have deliberately built a modern, future-facing toolkit: data analysis with Power BI, generative AI, software testing, and cybersecurity fundamentals — formally recognized as an IT Specialist by the Saudi Council of Engineers.</p>
+          <p>The objective is singular: to unite dependable IT execution with AI and data analysis, delivering solutions that are as intelligent as they are reliable.</p>
+        </div>
+        <aside class="vital-card reveal">
+          <div class="vital-head">Vital Record</div>
+          <dl class="vital-list">
+            <div><dt>Field</dt><dd>AI · Data · Information Technology</dd></div>
+            <div><dt>Education</dt><dd>University of Jeddah — CS &amp; IT</dd></div>
+            <div><dt>Accreditation</dt><dd>Saudi Council of Engineers · IT Specialist</dd></div>
+            <div><dt>Register No.</dt><dd>1104950</dd></div>
+            <div><dt>Languages</dt><dd>Arabic · English</dd></div>
+            <div><dt>Station</dt><dd>Saudi Arabia</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span></span><i>&#9670;</i><span></span></div>
+
+  <!-- ============================ II · COMPETENCIES ============================ -->
+  <section id="skills" class="section">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="sec-index">II</span>
+        <div><p class="sec-eyebrow">The Competencies</p><h2 class="sec-title">Instruments of the Trade</h2></div>
+      </header>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-head"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8"/><rect x="12" y="6" width="3" height="12"/><rect x="17" y="13" width="3" height="5"/></svg></span><h3>Data &amp; AI</h3></div>
+          <div class="chips"><span class="chip">Data Analysis</span><span class="chip">Power BI</span><span class="chip">Generative AI</span><span class="chip">Data Reporting</span><span class="chip">Database Management</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-head"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg></span><h3>IT &amp; Systems</h3></div>
+          <div class="chips"><span class="chip">IT Systems</span><span class="chip">Healthcare Systems (CareWare)</span><span class="chip">Cybersecurity Fundamentals</span><span class="chip">Data Entry Management</span><span class="chip">Microsoft Office</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-head"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span><h3>Quality &amp; Testing</h3></div>
+          <div class="chips"><span class="chip">Software Testing</span><span class="chip">Quality Assurance</span><span class="chip">Performance Analysis</span><span class="chip">Attention to Detail</span></div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-head"><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h3>Soft Skills</h3></div>
+          <div class="chips"><span class="chip">Communication</span><span class="chip">Creative Problem-Solving</span><span class="chip">Teamwork</span><span class="chip">Adaptability</span><span class="chip">Time Management</span><span class="chip">Strategic Planning</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span></span><i>&#9670;</i><span></span></div>
+
+  <!-- ============================ III · SERVICE ============================ -->
+  <section id="experience" class="section">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="sec-index">III</span>
+        <div><p class="sec-eyebrow">The Service Record</p><h2 class="sec-title">Professional Experience</h2></div>
+      </header>
+      <div class="accordion">
+        <div class="acc-item open reveal">
+          <button class="acc-trigger" aria-expanded="true">
+            <span class="acc-num">01</span>
+            <span class="acc-main"><span class="acc-role">Data Entry Specialist</span><span class="acc-org"> — Khulais General Hospital</span></span>
+            <span class="acc-period">Jan 2023 — Jan 2026</span>
+            <span class="acc-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="acc-panel">
+            <div class="acc-body">
+              <p class="acc-meta">Saudi Arabia</p>
+              <ul>
+                <li>Operated the CareWare medical system for end-to-end patient data management.</li>
+                <li>Registered patient information and managed admission processes across departments.</li>
+                <li>Collected and organized patient statistics in Excel for reporting.</li>
+                <li>Processed and approved medical leave requests.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="acc-item reveal">
+          <button class="acc-trigger" aria-expanded="false">
+            <span class="acc-num">02</span>
+            <span class="acc-main"><span class="acc-role">Trainee</span><span class="acc-org"> — Khulais General Hospital</span></span>
+            <span class="acc-period">Jun 2022 — Aug 2022</span>
+            <span class="acc-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="acc-panel">
+            <div class="acc-body">
+              <p class="acc-meta">Saudi Arabia</p>
+              <ul>
+                <li>Assisted in preparing daily reports for administrative departments.</li>
+                <li>Organized patient files and archived hospital records.</li>
+                <li>Trained on healthcare management systems and patient inquiry handling.</li>
+                <li>Learned medical data confidentiality protocols and registration procedures.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span></span><i>&#9670;</i><span></span></div>
+
+  <!-- ============================ IV · EDUCATION ============================ -->
+  <section id="education" class="section">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="sec-index">IV</span>
+        <div><p class="sec-eyebrow">The Schooling</p><h2 class="sec-title">Education</h2></div>
+      </header>
+      <div class="accordion">
+        <div class="acc-item open reveal">
+          <button class="acc-trigger" aria-expanded="true">
+            <span class="acc-num">01</span>
+            <span class="acc-main"><span class="acc-role">Bachelor's Degree — Computer Science &amp; IT</span><span class="acc-org"> — University of Jeddah</span></span>
+            <span class="acc-period">Nov 2018 — Feb 2024</span>
+            <span class="acc-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="acc-panel">
+            <div class="acc-body">
+              <p class="acc-meta">Saudi Arabia</p>
+              <ul>
+                <li>Built a strong foundation in computer science fundamentals and IT systems.</li>
+                <li>Gained practical experience in database management and network infrastructure.</li>
+                <li>Applied programming principles to solve technical problems effectively.</li>
+                <li>Sharpened analytical thinking and problem-solving through academic projects.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span></span><i>&#9670;</i><span></span></div>
+
+  <!-- ============================ V · WORKS ============================ -->
+  <section id="projects" class="section">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="sec-index">V</span>
+        <div><p class="sec-eyebrow">The Ledger of Works</p><h2 class="sec-title">Selected Projects</h2></div>
+      </header>
+      <div class="projects-grid">
+        <article class="proj-card featured reveal">
+          <span class="proj-flag">✦ Of Note</span>
+          <h3>Hospital Admissions Analytics</h3>
+          <p>Power BI dashboard concept tracking patient admissions and department load, built on real hospital data-entry workflows to surface bottlenecks.</p>
+          <div class="proj-tags"><span class="chip">Power BI</span><span class="chip">Data Analysis</span><span class="chip">Healthcare</span></div>
+        </article>
+        <article class="proj-card reveal">
+          <h3>Patient Data Quality Toolkit</h3>
+          <p>A software-testing and QA approach for validating patient records — checklists and test cases that reduce data-entry errors and enforce confidentiality rules.</p>
+          <div class="proj-tags"><span class="chip">Software Testing</span><span class="chip">Quality Assurance</span><span class="chip">Data Integrity</span></div>
+        </article>
+        <article class="proj-card reveal">
+          <h3>Generative AI Explorations</h3>
+          <p>Hands-on experiments applying generative AI to reporting and administrative writing — turning raw notes into structured, professional documents.</p>
+          <div class="proj-tags"><span class="chip">Generative AI</span><span class="chip">Automation</span><span class="chip">Reporting</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span></span><i>&#9670;</i><span></span></div>
+
+  <!-- ============================ VI · CREDENTIALS ============================ -->
+  <section id="certifications" class="section">
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <span class="sec-index">VI</span>
+        <div><p class="sec-eyebrow">The Credentials</p><h2 class="sec-title">Courses &amp; Certifications</h2></div>
+      </header>
+      <div class="cert-toggle-row reveal"><button id="cert-toggle" class="btn-textlink" aria-expanded="false">Unseal all credentials</button></div>
+      <div id="certs-grid" class="certs-grid">
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#C6A455;border-color:#C6A45566;">Data</span><span class="cert-date">May 2025</span></div><h3>Data Analysis using Power BI</h3><p class="cert-issuer">Wasm Knowledge Center for Training</p></div>
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#CBB069;border-color:#CBB06966;">Quality</span><span class="cert-date">Apr 2025</span></div><h3>Quality Specialist Skills &amp; Performance Analysis</h3><p class="cert-issuer">Wasm Knowledge Center for Training</p></div>
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#8A8377;border-color:#8A837766;">Foundations</span><span class="cert-date">Apr 2025</span></div><h3>Administrative Reports &amp; Letter Writing</h3><p class="cert-issuer">Wasm Knowledge Center for Training</p></div>
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#B98A4B;border-color:#B98A4B66;">Security</span><span class="cert-date">Apr 2025</span></div><h3>Fundamentals of Cybersecurity &amp; Cybercrimes</h3><p class="cert-issuer">Wasm Knowledge Center for Training</p></div>
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#A9925A;border-color:#A9925A66;">Testing</span><span class="cert-date">Dec 2024</span></div><h3>Fundamentals of Software Testing</h3><p class="cert-issuer">Tuwaiq Academy</p></div>
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#8A8377;border-color:#8A837766;">Foundations</span><span class="cert-date">Dec 2024</span></div><h3>International Computer Driving License (ICDL)</h3><p class="cert-issuer">Edraak Platform</p></div>
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#D9B866;border-color:#D9B86666;">AI</span><span class="cert-date">Aug 2024</span></div><h3>Generative Artificial Intelligence</h3><p class="cert-issuer">Misk</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span></span><i>&#9670;</i><span></span></div>
+
+  <!-- ============================ CONTACT ============================ -->
+  <section id="contact" class="section">
+    <div class="wrap wrap-narrow">
+      <header class="sec-head sec-head-center reveal">
+        <div>
+          <p class="sec-eyebrow">The Correspondence</p>
+          <h2 class="sec-title">Request an Audience</h2>
+          <p class="sec-lede">Open to positions and collaborations across AI, data, and information technology. Address me directly, or leave word below.</p>
+        </div>
+      </header>
+      <div class="contact-grid">
+        <div class="contact-details reveal">
+          <div class="contact-row"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M22 6l-10 7L2 6"/></svg></span><div><p class="lbl">By Letter</p><a class="val" href="mailto:majood2230@gmail.com">majood2230@gmail.com</a></div></div>
+          <div class="contact-row"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><p class="lbl">By Telephone</p><a class="val" href="tel:+966550323817">+966 550 323 817</a></div></div>
+          <div class="contact-row"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><p class="lbl">Station</p><p class="val">Saudi Arabia</p></div></div>
+        </div>
+        <form id="contact-form" class="contact-form" novalidate>
+          <label class="sr-only" for="cf-name">Name</label>
+          <input id="cf-name" name="name" type="text" required placeholder="Your name" class="field" />
+          <label class="sr-only" for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" required placeholder="Your email" class="field" />
+          <label class="sr-only" for="cf-msg">Message</label>
+          <textarea id="cf-msg" name="message" rows="4" required placeholder="Your message" class="field"></textarea>
+          <button type="submit" class="btn btn-gold btn-block">Dispatch Message</button>
+          <p id="cf-status" class="cf-status" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="30" height="30"><circle cx="50" cy="50" r="46" class="seal-ring-outer"/><text x="50" y="52" class="seal-mono" text-anchor="middle" dominant-baseline="central">MA</text></svg>
+    </span>
+    <p class="footer-copy">© <span id="year"></span> Majed Almutairi · Personnel Dossier</p>
+    <ul class="footer-socials">
+      <li><a href="mailto:majood2230@gmail.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M22 6l-10 7L2 6"/></svg></a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+/* =========================================================================
+ * Progressive enhancement — the page is fully readable without any of this.
+ * ========================================================================= */
+(function(){
+  "use strict";
+  document.documentElement.classList.add("js");
+
+  /* Navbar frost on scroll */
+  var navbar=document.getElementById("navbar");
+  function onScroll(){ if(navbar) navbar.classList.toggle("scrolled",window.scrollY>24); }
+  window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+
+  /* Mobile menu */
+  var toggle=document.getElementById("menu-toggle"), menu=document.getElementById("mobile-menu");
+  if(toggle&&menu){
+    toggle.addEventListener("click",function(){
+      var open=menu.classList.toggle("open");
+      toggle.setAttribute("aria-expanded",String(open));
+    });
+    menu.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click",function(){menu.classList.remove("open");toggle.setAttribute("aria-expanded","false");});
+    });
+  }
+
+  /* Scroll reveal */
+  var reveals=document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("is-visible"); io.unobserve(e.target);} });
+    },{threshold:.1,rootMargin:"0px 0px -40px 0px"});
+    reveals.forEach(function(el){io.observe(el);});
+  } else { reveals.forEach(function(el){el.classList.add("is-visible");}); }
+
+  /* Accordions (experience & education) */
+  function setPanel(item,open){
+    var panel=item.querySelector(".acc-panel"), trig=item.querySelector(".acc-trigger");
+    if(!panel) return;
+    item.classList.toggle("open",open);
+    if(trig) trig.setAttribute("aria-expanded",String(open));
+    panel.style.maxHeight=open?panel.scrollHeight+"px":"0px";
+  }
+  document.querySelectorAll(".accordion").forEach(function(acc){
+    acc.querySelectorAll(".acc-item").forEach(function(item){
+      var trig=item.querySelector(".acc-trigger");
+      setPanel(item,item.classList.contains("open"));
+      trig.addEventListener("click",function(){ setPanel(item,!item.classList.contains("open")); });
+    });
+  });
+  window.addEventListener("resize",function(){
+    document.querySelectorAll(".acc-item.open").forEach(function(i){setPanel(i,true);});
+  },{passive:true});
+
+  /* Certifications: unseal all */
+  var cbtn=document.getElementById("cert-toggle"), cgrid=document.getElementById("certs-grid");
+  if(cbtn&&cgrid){
+    cgrid.classList.add("collapsed");
+    if(cgrid.children.length<=4){ cgrid.classList.remove("collapsed"); cbtn.parentElement.style.display="none"; }
+    cbtn.addEventListener("click",function(){
+      var collapsed=cgrid.classList.toggle("collapsed");
+      cbtn.setAttribute("aria-expanded",String(!collapsed));
+      cbtn.textContent=collapsed?"Unseal all credentials":"Seal credentials";
+    });
+  }
+
+  /* Contact form (front-end; wire to Formspree/EmailJS to receive mail) */
+  var FORM_ENDPOINT="";
+  var form=document.getElementById("contact-form"), status=document.getElementById("cf-status");
+  function setStatus(m,c){ if(status){status.textContent=m;status.style.color=c;} }
+  if(form){
+    form.addEventListener("submit",function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){ setStatus("Kindly complete every field with a valid address.","#D9B866"); return; }
+      if(!FORM_ENDPOINT){ setStatus("Noted. Connect a backend to receive correspondence by email.","#C6A455"); form.reset(); return; }
+      setStatus("Dispatching…","#9A968C");
+      fetch(FORM_ENDPOINT,{method:"POST",headers:{Accept:"application/json"},body:new FormData(form)})
+        .then(function(r){ if(r.ok){setStatus("Message dispatched — you have my thanks.","#C6A455");form.reset();} else setStatus("A complication arose. Please write to me directly.","#B98A4B"); })
+        .catch(function(){ setStatus("The line is down. Please write to me directly.","#B98A4B"); });
+    });
+  }
+
+  /* Year */
+  var yr=document.getElementById("year"); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
