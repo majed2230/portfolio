@@ -195,6 +195,11 @@ body::after{
 .proj-card h3{font-family:var(--font-marque);font-weight:600;font-size:1.4rem;color:var(--parchment);margin-bottom:.6rem;line-height:1.15;}
 .proj-card p{font-size:1rem;color:var(--smoke);flex:1;}
 .proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;}
+/* Project action links (e.g. "View Code") — same gold language as .btn-resume */
+.proj-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid var(--line);}
+.proj-link{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--font-display);font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);border:1px solid var(--gold-lo);padding:.5rem .9rem;transition:background .25s,color .25s,border-color .25s;}
+.proj-link:hover{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.proj-link svg{width:15px;height:15px;flex:none;}
 
 /* ---------------------------------------------------- CERTIFICATIONS */
 .cert-toggle-row{margin-bottom:1.6rem;}
@@ -488,8 +493,29 @@ body::after{
         <div><p class="sec-eyebrow">The Ledger of Works</p><h2 class="sec-title">Selected Projects</h2></div>
       </header>
       <div class="projects-grid">
+        <!-- ---- Diabetes Risk Assessment (featured) ---- -->
         <article class="proj-card featured reveal">
           <span class="proj-flag">✦ Of Note</span>
+          <h3>Diabetes Risk Assessment</h3>
+          <p>A clinical decision-support interface for Type&nbsp;II diabetes screening. Eight PIMA diagnostic measurements are validated in-browser and sent to a FastAPI service, which returns a calibrated probability rendered on an animated risk dial against the model's decision threshold.</p>
+          <div class="proj-tags">
+            <span class="chip">Machine Learning</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">Python</span>
+            <span class="chip">REST API</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Healthcare AI</span>
+          </div>
+          <div class="proj-links">
+            <!-- Replace the href below with your GitHub repository URL -->
+            <a class="proj-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="View the source code for Diabetes Risk Assessment on GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+              View Code
+            </a>
+          </div>
+        </article>
+
+        <article class="proj-card reveal">
           <h3>Hospital Admissions Analytics</h3>
           <p>Power BI dashboard concept tracking patient admissions and department load, built on real hospital data-entry workflows to surface bottlenecks.</p>
           <div class="proj-tags"><span class="chip">Power BI</span><span class="chip">Data Analysis</span><span class="chip">Healthcare</span></div>
