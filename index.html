@@ -307,10 +307,147 @@ html[dir="rtl"] .acc-body li{padding-left:0;padding-right:1.3rem;}
 html[dir="rtl"] .acc-body li::before{left:auto;right:0;}
 @media(max-width:620px){html[dir="rtl"] .acc-body{padding-right:1.1rem;}}
 
+/* ============================================================
+ * INTRO ANIMATION — plays once per browser session.
+ * Black screen → rotating, glowing gold "MA" seal → the circle
+ * blooms open to reveal the dossier from within. Self-contained;
+ * touches nothing else on the page.
+ * ============================================================ */
+#ma-intro{
+  position:fixed; inset:0; z-index:3000;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; background:transparent;
+  --ma-ease:cubic-bezier(.72,0,.16,1);
+}
+html.ma-intro-done #ma-intro{ display:none !important; }
+body.ma-intro-lock{ overflow:hidden; }
+
+/* Full-screen black supplied by a fixed-spread shadow around a
+ * transparent circle. Grows the hole open to reveal the page. */
+#ma-intro .ma-aperture{
+  position:absolute; top:50%; left:50%;
+  width:0; height:0; border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:transparent;
+  box-shadow:0 0 0 100vmax var(--ink-0);
+  z-index:0; will-change:width,height;
+}
+#ma-intro.ma-reveal .ma-aperture{ animation:ma-open 1.15s var(--ma-ease) forwards; }
+@keyframes ma-open{ from{width:0;height:0;} to{width:300vmax;height:300vmax;} }
+
+/* Soft gold aura behind the seal */
+#ma-intro .ma-glow{
+  position:absolute; top:50%; left:50%;
+  width:360px; height:360px; margin:-180px 0 0 -180px;
+  border-radius:50%; z-index:1; pointer-events:none;
+  background:radial-gradient(circle,rgba(231,206,142,.30),rgba(198,164,85,.10) 46%,transparent 70%);
+  filter:blur(6px); opacity:0; transform:scale(.6);
+  animation:ma-glow-in .85s var(--ma-ease) .1s forwards, ma-glow-pulse 3s ease-in-out 1s infinite;
+}
+#ma-intro.ma-reveal .ma-glow{ animation:ma-glow-out 1.15s var(--ma-ease) forwards; }
+
+/* Expanding gold ring that carries the "circle fills the screen" feel */
+#ma-intro .ma-ring{
+  position:absolute; top:50%; left:50%;
+  width:150px; height:150px; margin:-75px 0 0 -75px;
+  border-radius:50%; border:2px solid var(--gold);
+  z-index:2; opacity:0; pointer-events:none;
+}
+#ma-intro.ma-reveal .ma-ring{ animation:ma-ring-out 1.15s var(--ma-ease) forwards; }
+@keyframes ma-ring-out{ 0%{opacity:.9;transform:scale(1);} 100%{opacity:0;transform:scale(17);} }
+
+/* The seal: gentle scale-in + slow drift up over the ~5s hold,
+ * wrapped so the SVG can rotate independently of the scale. */
+#ma-intro .ma-seal-wrap{
+  position:relative; z-index:3; width:150px; height:150px;
+  opacity:0; transform:scale(.86);
+  animation:ma-seal-in .8s var(--ma-ease) forwards, ma-seal-drift 4.6s ease-out .8s forwards;
+}
+#ma-intro.ma-reveal .ma-seal-wrap{ animation:ma-seal-bloom 1.15s var(--ma-ease) forwards; }
+#ma-intro .ma-seal{
+  width:150px; height:150px; display:block;
+  filter:drop-shadow(0 0 12px rgba(198,164,85,.50));
+  animation:ma-spin 18s linear infinite;
+  transform-origin:50% 50%;
+}
+@keyframes ma-seal-in{ from{opacity:0;transform:scale(.86);} to{opacity:1;transform:scale(1);} }
+@keyframes ma-seal-drift{ from{transform:scale(1);} to{transform:scale(1.1);} }
+@keyframes ma-seal-bloom{ 0%{opacity:1;transform:scale(1.1);} 45%{opacity:1;} 100%{opacity:0;transform:scale(2.6);} }
+@keyframes ma-spin{ to{transform:rotate(360deg);} }
+@keyframes ma-glow-in{ from{opacity:0;transform:scale(.6);} to{opacity:1;transform:scale(1);} }
+@keyframes ma-glow-pulse{ 0%,100%{opacity:.72;} 50%{opacity:1;} }
+@keyframes ma-glow-out{ from{opacity:1;transform:scale(1);} to{opacity:0;transform:scale(3);} }
+
+@media(max-width:620px){
+  #ma-intro .ma-seal-wrap,#ma-intro .ma-seal{ width:118px; height:118px; }
+  #ma-intro .ma-ring{ width:118px;height:118px;margin:-59px 0 0 -59px; }
+  #ma-intro .ma-glow{ width:280px;height:280px;margin:-140px 0 0 -140px; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #ma-intro .ma-seal,#ma-intro .ma-seal-wrap,#ma-intro .ma-glow{
+    animation-duration:.001ms!important; animation-iteration-count:1!important;
+    opacity:1;
+  }
+  #ma-intro.ma-reveal .ma-aperture{ animation-duration:.001ms!important; }
+}
+
 </style>
+<script>/* If the intro already played this session, skip it before first paint. */
+try{ if(sessionStorage.getItem("ma-intro-played")==="1"){ document.documentElement.className+=" ma-intro-done"; } }catch(e){}</script>
 </head>
 
 <body>
+
+<!-- ===================== INTRO ANIMATION (session-once) ===================== -->
+<div id="ma-intro" aria-hidden="true">
+  <div class="ma-aperture"></div>
+  <div class="ma-glow"></div>
+  <div class="ma-ring"></div>
+  <div class="ma-seal-wrap">
+    <svg class="ma-seal" viewBox="0 0 200 200" width="150" height="150">
+      <circle cx="100" cy="100" r="94" class="crest-ring-outer"/>
+      <circle cx="100" cy="100" r="80" class="crest-ring-inner"/>
+      <text x="100" y="102" class="crest-mono" text-anchor="middle" dominant-baseline="central">MA</text>
+      <text x="100" y="150" class="crest-sub" text-anchor="middle">— EST. 2024 —</text>
+    </svg>
+  </div>
+</div>
+<script>(function(){
+  var el = document.getElementById("ma-intro");
+  if(!el) return;
+  var docEl = document.documentElement;
+
+  /* Already played this session (head guard set the class) — remove overlay, do nothing. */
+  if(docEl.classList.contains("ma-intro-done")){
+    if(el.parentNode) el.parentNode.removeChild(el);
+    return;
+  }
+
+  var mark = function(){ try{ sessionStorage.setItem("ma-intro-played","1"); }catch(e){} };
+  var finish = function(){
+    docEl.classList.add("ma-intro-done");
+    document.body.classList.remove("ma-intro-lock");
+    if(el.parentNode) el.parentNode.removeChild(el);
+    mark();
+  };
+
+  var reduced = false;
+  try{ reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+
+  document.body.classList.add("ma-intro-lock");
+
+  if(reduced){
+    /* Honor reduced-motion: no theatrics, just hand over quickly. */
+    setTimeout(finish, 300);
+    return;
+  }
+
+  /* Hold ~5s on the glowing, slowly rotating seal, then bloom the circle open. */
+  setTimeout(function(){ el.classList.add("ma-reveal"); }, 5000);
+  setTimeout(finish, 6200);
+})();</script>
+
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ============================ NAV ============================ -->
@@ -589,21 +726,6 @@ html[dir="rtl"] .acc-body li::before{left:auto;right:0;}
           </div>
         </article>
 
-        <article class="proj-card reveal">
-          <h3 data-i18n="proj.p2.title">Hospital Admissions Analytics</h3>
-          <p data-i18n="proj.p2.desc">Power BI dashboard concept tracking patient admissions and department load, built on real hospital data-entry workflows to surface bottlenecks.</p>
-          <div class="proj-tags"><span class="chip" data-i18n="chip.powerbi">Power BI</span><span class="chip" data-i18n="chip.dataAnalysis">Data Analysis</span><span class="chip" data-i18n="chip.healthcare">Healthcare</span></div>
-        </article>
-        <article class="proj-card reveal">
-          <h3 data-i18n="proj.p3.title">Patient Data Quality Toolkit</h3>
-          <p data-i18n="proj.p3.desc">A software-testing and QA approach for validating patient records — checklists and test cases that reduce data-entry errors and enforce confidentiality rules.</p>
-          <div class="proj-tags"><span class="chip" data-i18n="chip.swTesting">Software Testing</span><span class="chip" data-i18n="chip.qa">Quality Assurance</span><span class="chip" data-i18n="chip.dataIntegrity">Data Integrity</span></div>
-        </article>
-        <article class="proj-card reveal">
-          <h3 data-i18n="proj.p4.title">Generative AI Explorations</h3>
-          <p data-i18n="proj.p4.desc">Hands-on experiments applying generative AI to reporting and administrative writing — turning raw notes into structured, professional documents.</p>
-          <div class="proj-tags"><span class="chip" data-i18n="chip.genai">Generative AI</span><span class="chip" data-i18n="chip.automation">Automation</span><span class="chip" data-i18n="chip.reporting">Reporting</span></div>
-        </article>
       </div>
     </div>
   </section>
@@ -626,6 +748,7 @@ html[dir="rtl"] .acc-body li::before{left:auto;right:0;}
         <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#A9925A;border-color:#A9925A66;" data-i18n="tag.testing">Testing</span><span class="cert-date" data-i18n="date.dec2024">Dec 2024</span></div><h3 data-i18n="cert.c5">Fundamentals of Software Testing</h3><p class="cert-issuer" data-i18n="issuer.tuwaiq">Tuwaiq Academy</p></div>
         <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#8A8377;border-color:#8A837766;" data-i18n="tag.foundations">Foundations</span><span class="cert-date" data-i18n="date.dec2024">Dec 2024</span></div><h3 data-i18n="cert.c6">International Computer Driving License (ICDL)</h3><p class="cert-issuer" data-i18n="issuer.edraak">Edraak Platform</p></div>
         <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#D9B866;border-color:#D9B86666;" data-i18n="tag.ai">AI</span><span class="cert-date" data-i18n="date.aug2024">Aug 2024</span></div><h3 data-i18n="cert.c7">Generative Artificial Intelligence</h3><p class="cert-issuer" data-i18n="issuer.misk">Misk</p></div>
+        <div class="cert-card reveal"><div class="cert-top"><span class="cert-tag" style="color:#D9B866;border-color:#D9B86666;" data-i18n="tag.ai">AI</span></div><h3>AI Agents Engineering Bootcamp</h3><p class="cert-issuer">Hash Plus</p></div>
       </div>
     </div>
   </section>
